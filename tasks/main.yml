@@ -1,0 +1,14 @@
+---
+- name: Install centos-release-scl-rh
+  become: true
+  package:
+    name: centos-release-scl-rh
+    state: latest
+
+- name: Change mirror site
+  become: true
+  replace:
+    path: /etc/yum.repos.d/CentOS-SCLo-scl-rh.repo
+    regexp: 'mirror\.centos\.org'
+    replace: "{{ yum_repo_fqdn }}"
+    backup: yes
